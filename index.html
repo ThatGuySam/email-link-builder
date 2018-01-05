@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Email Link Builder</title>
+  
+  
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.css'>
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css'>
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Poppins:400,700'>
+
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+
+  <div id="app" class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <h2 class="subtitle">The Link</h2>
+        <pre style="word-break: break-all;">
+        {{ link }}
+        </pre>
+        <br />
+        <h2 class="subtitle">The Html</h2>
+        <pre style="word-break: break-all;">
+        {{ html }}
+        </pre>
+        <br />
+        <div class="level">
+          <p class="level-item has-text-centered">
+             <a :href="link" class="button is-medium is-primary" target="_blank">Test</a>
+          </p>
+        </div>
+      </div>
+      <div class="column">
+        <h2 class="subtitle">The Email</h2>
+        <div class="card">
+          <header class="card-header is-block">
+              <div class="field">
+                <div class="control">
+                  <input 
+                    class="input is-quiet is-medium"
+                    type="text" 
+                    placeholder="To"
+                    value=""
+                    v-model="to"
+                    autofocus
+                  >
+                      <!-- autofocus -->
+                </div>
+                <div class="control">
+                  <input 
+                    class="input is-quiet is-medium" 
+                    type="text" 
+                    placeholder="Cc"
+                    v-model="cc"
+                  >
+                </div>
+                <div class="control">
+                  <input
+                    class="input is-quiet is-medium"
+                    type="email"
+                    placeholder="Bcc"
+                    v-model="bcc"
+                  >
+                </div>
+              </div>
+          </header>
+          <div class="card-content">
+            <div class="field">
+              <div class="control">
+                <input
+                  class="input is-quiet is-medium"
+                  type="text"
+                  placeholder="Subject"
+                  v-model="subject"
+                >
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <textarea
+                  class="textarea is-quiet is-medium"
+                  placeholder="Body"
+                  v-model="body"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <p class="card-footer-item">
+              <span>
+                <a :href="link" class="button is-medium is-primary" target="_blank">Send</a>
+              </span>
+            </p>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div><!--  .container  -->
+</div><!--  .section  -->
+
+<div class="level">
+  <p class="level-item has-text-centered">
+    <a href="https://www.messenger.com/t/samcarltoncreative" target="_blank">Help</a>
+  </p>
+</div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/is_js/0.9.0/is.js'></script>
+
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>
