@@ -9,6 +9,7 @@
   <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.css'>
 <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css'>
 <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Poppins:400,700'>
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css'>
 
       <link rel="stylesheet" href="css/style.css">
 
@@ -18,26 +19,9 @@
 <body>
 
   <div id="app" class="section">
-  <div class="container">
+  <div class="container" style="max-width: 900px;">
     <div class="columns">
-      <div class="column">
-        <h2 class="subtitle">The Link</h2>
-        <pre style="word-break: break-all;">
-        {{ link }}
-        </pre>
-        <br />
-        <h2 class="subtitle">The Html</h2>
-        <pre style="word-break: break-all;">
-        {{ html }}
-        </pre>
-        <br />
-        <div class="level">
-          <p class="level-item has-text-centered">
-             <a :href="link" class="button is-medium is-primary" target="_blank">Test</a>
-          </p>
-        </div>
-      </div>
-      <div class="column">
+      <div class="column animated fadeIn">
         <h2 class="subtitle">The Email</h2>
         <div class="card">
           <header class="card-header is-block">
@@ -101,7 +85,26 @@
           </footer>
         </div>
       </div>
-    </div>
+      <div class="column">
+        <div v-if="to !== ''" class="animated fadeIn">
+          <h2 class="subtitle">The Link</h2>
+          <pre style="word-break: break-all;">
+          {{ link }}
+          </pre>
+          <br />
+          <h2 class="subtitle">The Html</h2>
+          <pre style="word-break: break-all;">
+          {{ html }}
+          </pre>
+          <br />
+          <div class="level">
+            <p class="level-item has-text-centered">
+               <a :href="link" class="button is-medium is-primary" target="_blank">Test</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div><!--  .columns  -->
   </div><!--  .container  -->
 </div><!--  .section  -->
 
