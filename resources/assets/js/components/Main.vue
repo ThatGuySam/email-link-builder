@@ -37,6 +37,7 @@
               </div>
             </header>
             <div class="card-content">
+
               <div class="field">
                 <div class="control">
                   <input
@@ -47,6 +48,7 @@
                   >
                 </div>
               </div>
+
               <div class="field">
                 <div class="control">
                   <textarea
@@ -56,6 +58,7 @@
                   ></textarea>
                 </div>
               </div>
+
             </div>
             <footer class="card-footer">
               <p class="card-footer-item">
@@ -104,42 +107,41 @@
       }
     },
     computed: {
-      params: function params() {
-        var params = {};
+      params () {
+        var params = {}
 
-        if (is.not.empty(this.cc)) params.cc = this.cc;
-        if (is.not.empty(this.bcc)) params.bcc = this.bcc;
-        if (is.not.empty(this.subject)) params.subject = this.subject;
-        if (is.not.empty(this.body)) params.body = this.body;
+        if (is.not.empty(this.cc)) params.cc = this.cc
+        if (is.not.empty(this.bcc)) params.bcc = this.bcc
+        if (is.not.empty(this.subject)) params.subject = this.subject
+        if (is.not.empty(this.body)) params.body = this.body
 
-        return params;
+        return params
       },
-      queryString: function queryString() {
-        var keys = Object.keys(this.params);
-        var query = keys.map(this.mapParam);
-        var queryString = query.join('&');
+      queryString () {
+        var keys = Object.keys(this.params)
+        var query = keys.map(this.mapParam)
+        var queryString = query.join('&')
 
-        return queryString;
+        return queryString
       },
-      link: function link() {
-        var link = 'mailto:' + this.to;
+      link () {
         const toEncoded = encodeURIComponent(this.to)
         let link = 'mailto:' + toEncoded
 
         if (is.not.empty(this.queryString)) {
-          link += '?' + this.queryString;
+          link += '?' + this.queryString
         }
 
-        return link;
+        return link
       },
-      html: function html() {
-        var linkText = is.not.empty(this.subject) ? this.subject : 'Say Hello';
-        return '<a href="' + this.link + '">' + linkText + '</a>';
+      html () {
+        var linkText = is.not.empty(this.subject) ? this.subject : 'Say Hello'
+        return '<a href="' + this.link + '">' + linkText + '</a>'
       }
     },
     methods: {
-      mapParam: function mapParam(key) {
-        return encodeURIComponent(key) + '=' + encodeURIComponent(this.params[key]);
+      mapParam (key) {
+        return encodeURIComponent(key) + '=' + encodeURIComponent(this.params[key])
       }
     }
   }
