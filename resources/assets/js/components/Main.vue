@@ -91,12 +91,7 @@
 </template>
 
 <script>
-  import axios from 'axios'
   import is from 'is_js'
-  // import {default as gsheets} from 'gsheets'
-
-  require('isomorphic-fetch')
-  const gsheets = require('gsheets')
 
   export default {
     data: function () {
