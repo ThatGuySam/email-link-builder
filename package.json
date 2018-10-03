@@ -1,0 +1,61 @@
+{
+  "name": "email-link-builder",
+  "description": "A Pen created at CodePen.io. You can find this one at https://codepen.io/ThatGuySam/pen/jYGwMR.",
+  "version": "1.0.0",
+  "main": "index.html",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThatGuySam/email-link-builder.git"
+  },
+  "keywords": [
+    "email",
+    "link",
+    "mailto"
+  ],
+  "author": "Sam Carlton",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThatGuySam/email-link-builder/issues"
+  },
+  "homepage": "https://github.com/ThatGuySam/email-link-builder#readme",
+  "scripts": {
+    "start": "npm run production",
+    "clean": "npm cache clean --force",
+    "rebuild-sass": "npm rebuild node-sass --force",
+    "dev": "npm run development",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch-poll": "npm run watch -- --watch-poll",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "npm run production",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "lint": "eslint resources/assets/js --ext .vue",
+    "fix": "npm run lint -- --fix",
+    "stage": "yarn production && now --static",
+    "deploy": "netlifyctl deploy"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.24.4",
+    "browser-sync-webpack-plugin": "2.0.1",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.0.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "eslint-plugin-vue": "^4.5.0",
+    "laravel-mix": "^2.1.14"
+  },
+  "dependencies": {
+    "axios": "^0.18",
+    "bootstrap": "^4.1.1",
+    "gsheets": "^2.0.0",
+    "is_js": "^0.9.0",
+    "isomorphic-fetch": "^2.2.1",
+    "now-env": "^3.0.4",
+    "vue": "^2.5.17",
+    "vue-form": "^4.9.0",
+    "vue-template-compiler": "^2.5.17"
+  }
+}
