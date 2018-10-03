@@ -123,6 +123,8 @@
       },
       link: function link() {
         var link = 'mailto:' + this.to;
+        const toEncoded = encodeURIComponent(this.to)
+        let link = 'mailto:' + toEncoded
 
         if (is.not.empty(this.queryString)) {
           link += '?' + this.queryString;
