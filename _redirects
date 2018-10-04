@@ -1,2 +1,4 @@
+# https://www.netlify.com/docs/redirects/
+
 # Redirect default Netlify subdomain to primary domain
 https://email-link-builder.netlify.com/* https://email-link-builder.samcarlton.com/:splat 301!
