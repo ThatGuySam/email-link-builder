@@ -170,10 +170,12 @@
     },
     mounted () {
       // If fields is not set up yet initialize it
-      if (is.not.object(local.fields)) local.fields = {}
-
-      // Get fields
-      this.getFields()
+      if (is.not.object(local.fields)) {
+        local.fields = {}
+      } else {
+        // Get fields
+        this.getFields()
+      }
     },
     methods: {
       mapParam (key) {
@@ -194,6 +196,9 @@
       },
       getFields () {
         fields.forEach((key) => {
+          const fields = local.fields
+          // If this field is empty then stop
+          if (is.not.propertyDefined(fields, key)) return
           this[key] = local.fields[key]
         })
       },
