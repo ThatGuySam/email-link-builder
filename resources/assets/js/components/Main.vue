@@ -73,6 +73,14 @@
                     target="_blank">Send</a>
                 </span>
               </p>
+              <p class="card-footer-item is-left">
+                <span>
+                  <a
+                    @click="clear"
+                    class="button is-medium is-secondary"
+                    target="_blank">Clear</a>
+                </span>
+              </p>
             </footer>
           </div>
         </div>
@@ -107,6 +115,15 @@
 
 <script>
   import is from 'is_js'
+  import { local } from 'brownies'
+
+  const fields = [
+    'to',
+    'cc',
+    'bcc',
+    'subject',
+    'body',
+  ]
 
   export default {
     data () {
@@ -151,9 +168,39 @@
         return `<a href="${this.link}">${linkText}</a>`
       }
     },
+    mounted () {
+      // If fields is not set up yet initialize it
+      if (is.not.object(local.fields)) local.fields = {}
+
+      // Get fields
+      this.getFields()
+    },
     methods: {
       mapParam (key) {
         return `${encodeURIComponent(key)}=${encodeURIComponent(this.params[key])}`
+      },
+      clear () {
+        fields.forEach((key) => {
+          this[key] = ''
+        })
+      },
+      setFields () {
+        fields.forEach((key) => {
+          local.fields = {
+            ...local.fields,
+            [key]: this[key]
+          }
+        })
+      },
+      getFields () {
+        fields.forEach((key) => {
+          this[key] = local.fields[key]
+        })
+      },
+    },
+    watch: {
+      link () {
+        this.setFields()
       }
     }
   }
