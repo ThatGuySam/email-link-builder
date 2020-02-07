@@ -1,7 +1,10 @@
 const mix = require('laravel-mix')
-const webpack = require('webpack')
+
 require('now-env')
 require('laravel-mix-purgecss')
+require('mix-html-builder')
+
+const webpack = require('webpack')
 
 /*
   |--------------------------------------------------------------------------
@@ -28,14 +31,14 @@ const config = (webpackInstance) => {
 mix.setPublicPath('public')
 
 mix.webpackConfig({
-   devtool: 'source-map',
-   plugins: [
-     new webpack.DefinePlugin({
-       // Shared with front-end
-       'process.env.APP_NAME': JSON.stringify(process.env.APP_NAME),
+  devtool: 'source-map',
+  plugins: [
+    new webpack.DefinePlugin({
+      // Shared with front-end
+      'process.env.APP_NAME': JSON.stringify(process.env.APP_NAME),
       //  'process.env.JOTFORM_KEY': JSON.stringify(process.env.JOTFORM_KEY)
-     })
-   ]
+    }),
+  ]
 }).sourceMaps()
 
 
@@ -50,4 +53,14 @@ mix.browserSync({ // eslint-disable-line no-sync
 mix.js('resources/assets/js/app.js', 'public/js')
   .sass('resources/assets/sass/app.scss', 'public/css')
   .purgeCss()
+  .html({
+    htmlRoot: 'resources/index.html',
+    output: '.',
+    // partialRoot: './src/partials',    // default partial path
+    // layoutRoot: './src/layouts',    // default partial path
+    minify: {
+        removeComments: true
+    },
+    // inject: true
+  })
 

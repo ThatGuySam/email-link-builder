@@ -21,3 +21,4 @@ npm-debug.log
 /public/mix-manifest.json
 now-secrets.json
 /netlifyctl-debug.log
+/public/index.html

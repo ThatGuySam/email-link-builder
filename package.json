@@ -45,8 +45,13 @@
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
     "eslint-plugin-vue": "^4.5.0",
+    "html-webpack-plugin": "^4.0.0-beta.11",
     "laravel-mix": "^5.0.1",
     "laravel-mix-purgecss": "^5.0.0-rc.1",
+    "mix-html-builder": "^0.4.0",
+    "posthtml": "^0.12.0",
+    "posthtml-include": "^1.3.3",
+    "posthtml-loader": "^1.0.2",
     "resolve-url-loader": "2.3.1",
     "sass": "^1.15.3",
     "sass-loader": "7.*"
