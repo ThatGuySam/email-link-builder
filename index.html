@@ -17,6 +17,8 @@
     <!-- Gives a general age rating based on the document's content -->
     <meta name="rating" content="General" />
 
+    <link rel="preload" type="font/ttf" href="/public/fonts/manropegx-webfont.ttf">
+
     <!-- Facebook Pixel Code -->
     <script>
       !function(f,b,e,v,n,t,s)
@@ -35,7 +37,16 @@
     /></noscript>
     <!-- End Facebook Pixel Code -->
 
-    <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Poppins:400,700' />
+    <style>
+        @font-face {
+            font-family: 'Manrope Variable';
+            src: url('/public/fonts/manropegx-webfont.ttf') format('ttf');
+            font-style: normal;
+
+            font-weight: 100 900;
+            font-display: swap;
+        }
+    </style>
 
     <link rel="stylesheet" href="/public/css/app.css" />
 
