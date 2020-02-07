@@ -1,10 +1,30 @@
 <template>
-  <div
-    class="section">
+  <div class="section">
     <div
       class="container"
-      style="max-width: 900px;">
-      <div class="columns desktop-row-reverse">
+      style="max-width: 900px;"
+    >
+      <div
+        v-if="isMailLink"
+        class="has-text-centered level"
+        style="min-height: 80vh;"
+      >
+        <div class="level-item">
+          <div>
+            <div class="is-block">Opening email</div>
+            <div class="is-size-7	">
+              <a
+                :href="mailRedirectUrl"
+                class="is-block"
+              >Click here is the email doesn't open automatically</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        v-else
+        class="columns desktop-row-reverse"
+      >
 
         <div class="column">
           <div
@@ -136,6 +156,26 @@
     'body',
   ]
 
+  const urlParams = new URLSearchParams(window.location.search)
+  // const urlParamsObject = Object.fromEntries(urlParams)
+  const pathParts = window.location.pathname.split('/')
+
+  const isMailLink = () => {
+    const hasEmailInUrl = is.email(pathParts[1]) || is.email(urlParams.get('to'))
+
+    return hasEmailInUrl
+  }
+
+  const makeMailtoRedirectURL = () => {
+    const mailtoParams = new URLSearchParams(window.location.search)
+    const email = pathParts[1] || mailtoParams.get('to')
+
+    // If the 'to' param is set then remove it
+    mailtoParams.delete('to')
+
+    return `mailto:${email}?${mailtoParams.toString(0)}`
+  }
+
   export default {
     data () {
       return {
@@ -147,6 +187,10 @@
       }
     },
     computed: {
+      isMailLink,
+      mailRedirectUrl () {
+        return makeMailtoRedirectURL()
+      },
       params () {
         const params = {}
 
@@ -185,6 +229,13 @@
       }
     },
     mounted () {
+      if (this.isMailLink) {
+        // Open the mailto url
+        const emailWindow = window.open(this.mailRedirectUrl, '_blank')
+        // Focus the new window
+        emailWindow.focus()
+      }
+
       // If fields is not set up yet initialize it
       if (is.not.object(local.fields)) {
         local.fields = {}
