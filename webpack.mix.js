@@ -1,6 +1,7 @@
 const mix = require('laravel-mix')
 const webpack = require('webpack')
 require('now-env')
+require('laravel-mix-purgecss')
 
 /*
   |--------------------------------------------------------------------------
@@ -48,3 +49,5 @@ mix.browserSync({ // eslint-disable-line no-sync
 
 mix.js('resources/assets/js/app.js', 'public/js')
   .sass('resources/assets/sass/app.scss', 'public/css')
+  .purgeCss()
+
