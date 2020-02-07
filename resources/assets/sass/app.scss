@@ -21,3 +21,9 @@ pre {
     overflow-wrap: break-word;
     white-space: normal;
 }
+
+@media (min-width: 640px) {
+    .desktop-row-reverse {
+        flex-direction: row-reverse;
+    }
+}
