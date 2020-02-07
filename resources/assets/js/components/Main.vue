@@ -23,7 +23,7 @@
               <p class="level-item has-text-centered">
                 <a
                   :href="link"
-                  class="button is-medium is-info"
+                  class="button is-medium is-dark"
                   target="_blank">Test</a>
               </p>
             </div>
@@ -93,7 +93,7 @@
                 <span>
                   <a
                     :href="link"
-                    class="button is-medium is-info"
+                    class="button is-medium is-dark"
                     target="_blank">Send</a>
                 </span>
               </p>
