@@ -126,7 +126,7 @@
 
 <script>
   import is from 'is_js'
-  import { local } from 'brownies'
+  import {local} from 'brownies'
 
   const fields = [
     'to',
@@ -179,6 +179,11 @@
         return `<a href="${this.link}">${linkText}</a>`
       }
     },
+    watch: {
+      link () {
+        this.setFields()
+      }
+    },
     mounted () {
       // If fields is not set up yet initialize it
       if (is.not.object(local.fields)) {
@@ -206,18 +211,14 @@
         })
       },
       getFields () {
+        const localFields = local.fields
+        
         fields.forEach((key) => {
-          const fields = local.fields
           // If this field is empty then stop
-          if (is.not.propertyDefined(fields, key)) return
+          if (is.not.propertyDefined(localFields, key)) return
           this[key] = local.fields[key]
         })
       },
-    },
-    watch: {
-      link () {
-        this.setFields()
-      }
     }
   }
 </script>
