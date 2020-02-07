@@ -5,7 +5,32 @@
     <div
       class="container"
       style="max-width: 900px;">
-      <div class="columns">
+      <div class="columns desktop-row-reverse">
+
+        <div class="column">
+          <div
+            class="animated fadeIn">
+            <h2 class="subtitle">The Link</h2>
+            <pre style="word-break: break-all;">
+                {{ link }}
+            </pre>
+            <br >
+            <h2 class="subtitle">The Html</h2>
+            <pre style="word-break: break-all;">
+                {{ html }}
+            </pre>
+            <br >
+            <div class="level">
+              <p class="level-item has-text-centered">
+                <a
+                  :href="link"
+                  class="button is-medium is-info"
+                  target="_blank">Test</a>
+              </p>
+            </div>
+          </div>
+        </div>
+
         <div class="column animated fadeIn">
           <h2 class="subtitle">The Email</h2>
           <div class="card">
@@ -69,7 +94,7 @@
                 <span>
                   <a
                     :href="link"
-                    class="button is-medium is-primary"
+                    class="button is-medium is-info"
                     target="_blank">Send</a>
                 </span>
               </p>
@@ -84,30 +109,7 @@
             </footer>
           </div>
         </div>
-        <div class="column">
-          <div
-            v-if="to !== ''"
-            class="animated fadeIn">
-            <h2 class="subtitle">The Link</h2>
-            <pre style="word-break: break-all;">
-                {{ link }}
-            </pre>
-            <br >
-            <h2 class="subtitle">The Html</h2>
-            <pre style="word-break: break-all;">
-                {{ html }}
-            </pre>
-            <br >
-            <div class="level">
-              <p class="level-item has-text-centered">
-                <a
-                  :href="link"
-                  class="button is-medium is-primary"
-                  target="_blank">Test</a>
-              </p>
-            </div>
-          </div>
-        </div>
+
       </div><!--  .columns  -->
     </div><!--  .container  -->
   </div><!--  .section  -->

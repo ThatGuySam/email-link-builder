@@ -17,6 +17,34 @@
     <!-- Gives a general age rating based on the document's content -->
     <meta name="rating" content="General" />
 
+    <link rel="preload" type="font/ttf" href="/public/fonts/manropegx-webfont.ttf">
+
+    <style>
+        @font-face {
+            font-family: 'Manrope Variable';
+            src: url('/public/fonts/manropegx-webfont.ttf') format('ttf');
+            font-style: normal;
+
+            font-weight: 100 900;
+            font-display: swap;
+        }
+    </style>
+
+    <link rel="stylesheet" href="/public/css/app.css" />
+
+  </head>
+  <body>
+
+    <div id="app">
+      <app />
+    </div>
+    
+    <div class="level">
+      <p class="level-item has-text-centered">
+        <a href="https://www.messenger.com/t/samcarltoncreative" target="_blank">Help</a>
+      </p>
+    </div>
+
     <!-- Facebook Pixel Code -->
     <script>
       !function(f,b,e,v,n,t,s)
@@ -34,23 +62,6 @@
       src="https://www.facebook.com/tr?id=149999852253148&ev=PageView&noscript=1"
     /></noscript>
     <!-- End Facebook Pixel Code -->
-
-    <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Poppins:400,700' />
-
-    <link rel="stylesheet" href="/public/css/app.css" />
-
-  </head>
-  <body>
-
-    <div id="app">
-      <app />
-    </div>
-    
-    <div class="level">
-      <p class="level-item has-text-centered">
-        <a href="https://www.messenger.com/t/samcarltoncreative" target="_blank">Help</a>
-      </p>
-    </div>
 
     <script src="/public/js/app.js"></script>
   </body>

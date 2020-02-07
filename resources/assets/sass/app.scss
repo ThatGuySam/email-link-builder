@@ -7,7 +7,8 @@
 // @import "variables";
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Manrope Variable', sans-serif;
+    font-weight: 400;
 }
 
 input.is-quiet,
@@ -20,4 +21,10 @@ textarea.is-quiet {
 pre {
     overflow-wrap: break-word;
     white-space: normal;
+}
+
+@media (min-width: 640px) {
+    .desktop-row-reverse {
+        flex-direction: row-reverse;
+    }
 }
