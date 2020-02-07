@@ -23,8 +23,10 @@
               <p class="level-item has-text-centered">
                 <a
                   :href="link"
+                  aria-label="Test Email Link"
                   class="button is-medium is-dark"
-                  target="_blank">Test</a>
+                  target="_blank"
+                >Test</a>
               </p>
             </div>
           </div>
@@ -39,6 +41,7 @@
                   <input
                     v-model="to"
                     class="input is-quiet is-medium"
+                    aria-label="Email Recipient"
                     type="text"
                     placeholder="To"
                     value=""
@@ -50,6 +53,7 @@
                   <input
                     v-model="cc"
                     class="input is-quiet is-medium"
+                    aria-label="Carbon Copy"
                     type="text"
                     placeholder="Cc"
                   >
@@ -58,7 +62,8 @@
                   <input
                     v-model="bcc"
                     class="input is-quiet is-medium"
-                    type="email"
+                    aria-label="Blind Carbon Copy"
+                    type="text"
                     placeholder="Bcc"
                   >
                 </div>
@@ -71,6 +76,7 @@
                   <input
                     v-model="subject"
                     class="input is-quiet is-medium"
+                    aria-label="Subject"
                     type="text"
                     placeholder="Subject"
                   >
@@ -82,6 +88,7 @@
                   <textarea
                     v-model="body"
                     class="textarea is-quiet is-medium"
+                    aria-label="Body Text"
                     placeholder="Body"
                   />
                 </div>
@@ -93,16 +100,19 @@
                 <span>
                   <a
                     :href="link"
+                    aria-label="Open Email"
                     class="button is-medium is-dark"
-                    target="_blank">Send</a>
+                    target="_blank"
+                  >Send</a>
                 </span>
               </p>
               <p class="card-footer-item is-left">
                 <span>
-                  <a
-                    @click="clear"
+                  <button
+                    aria-label="Clear Fields"
                     class="button is-medium is-secondary"
-                    target="_blank">Clear</a>
+                    @click="clear"
+                  >Clear</button>
                 </span>
               </p>
             </footer>
