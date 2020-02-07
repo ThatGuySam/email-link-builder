@@ -1,6 +1,5 @@
 <template>
   <div
-    id="app"
     class="section">
     <div
       class="container"
