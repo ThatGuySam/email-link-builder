@@ -43,7 +43,7 @@ mix.browserSync({ // eslint-disable-line no-sync
   proxy: false,
   single: true,
   server: {
-    baseDir: '.'
+    baseDir: './public'
   }
 })
 

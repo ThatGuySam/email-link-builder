@@ -2,7 +2,7 @@
   ID = "fcadad41-d27a-43e8-8473-2d37075326ea"
 
 [Build]
-  Publish = ""
+  Publish = "public"
   Functions = ""
 
 # The following redirect is intended for use with most SPAs that handle
