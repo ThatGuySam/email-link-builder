@@ -40,6 +40,8 @@ const variabler = (match, p1) => {
 
 const parseVariableString = (string) => string.replace(/\{\{(.+?)\}\}/g, variabler)
 
+const replacePlusesWithEncodedSpaces = (string) => string.replace(/\+/g, '%20')
+
 const makeMailtoRedirectURL = () => {
   const mailtoParams = new URLSearchParams(window.location.search)
   const email = pathParts[1] || mailtoParams.get('to')
@@ -56,12 +58,15 @@ const makeMailtoRedirectURL = () => {
     const paramValue = mailtoParams.get(paramName)
 
     if (paramValue !== null) {
-      // console.log(paramName, parseVariableString(paramValue))
-      mailtoParams.set(paramName, parseVariableString(paramValue))
+      const paramValueWithVariables = parseVariableString(paramValue)
+      
+      mailtoParams.set(paramName, paramValueWithVariables)
     }
   })
 
-  return `mailto:${email}?${mailtoParams.toString()}`
+  const queryString = replacePlusesWithEncodedSpaces(mailtoParams.toString())
+
+  return `mailto:${email}?${queryString}`
 }
 
 export default {
