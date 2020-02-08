@@ -1,5 +1,7 @@
 <template>
-  <div class="section">
+  <div
+    class="section"
+  >
     <div
       class="container"
       style="max-width: 900px;"
@@ -114,6 +116,23 @@
                 </div>
               </div>
 
+              <div class="field">
+                <div class="control">
+                  <label class="checkbox">
+                    <input
+                      v-model="usingMailtoTools"
+                      type="checkbox"
+                    >
+                    Enable Variables
+                  </label>
+                  <Hint>
+                    <pre class="is-block">
+                      <div v-html="'{{date}} : Today\'s date'" />
+                    </pre>
+                  </Hint>
+                </div>
+              </div>
+
             </div>
             <footer class="card-footer">
               <p class="card-footer-item">
@@ -148,6 +167,10 @@
   import is from 'is_js'
   import {local} from 'brownies'
 
+  import {getOption, setOption} from '../helpers/options'
+
+  import Hint from './Hint.vue'
+
   const fields = [
     'to',
     'cc',
@@ -166,6 +189,27 @@
     return hasEmailInUrl
   }
 
+  const variabler = (match, p1) => {
+    const dateOptions = {
+      // weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }
+    
+    const variablerVariables = {
+      'date': (new Date()).toLocaleDateString('en-US', dateOptions)
+    }
+
+    if (!(p1 in variablerVariables)) return ''
+
+    return variablerVariables[p1]
+  }
+
+  const parseVariableString = (string) => {
+    return string.replace(/\{\{(.+?)\}\}/g, variabler)
+  }
+
   const makeMailtoRedirectURL = () => {
     const mailtoParams = new URLSearchParams(window.location.search)
     const email = pathParts[1] || mailtoParams.get('to')
@@ -173,17 +217,26 @@
     // If the 'to' param is set then remove it
     mailtoParams.delete('to')
 
+    const subject = mailtoParams.get('subject')
+    if (subject) mailtoParams.set('subject', parseVariableString(subject))
+
+    const body = mailtoParams.get('body')
+    if (body) mailtoParams.set('body', parseVariableString(body))
+
     return `mailto:${email}?${mailtoParams.toString(0)}`
   }
 
   export default {
+    components: {Hint},
     data () {
       return {
         to: '',
         cc: '',
         bcc: '',
         subject: '',
-        body: ''
+        body: '',
+
+        usingMailtoTools: getOption('usingMailtoTools') || false
       }
     },
     computed: {
@@ -202,15 +255,19 @@
         return params
       },
       queryString () {
-        const keys = Object.keys(this.params)
-        const query = keys.map(this.mapParam)
-        const queryString = query.join('&')
+        const outputParams = new URLSearchParams()
 
-        return queryString
+        Object.entries(this.params).forEach((paramEntry) => {
+          outputParams.set(paramEntry[0], paramEntry[1])
+        })
+
+        return outputParams.toString()
       },
       link () {
-        const toEncoded = encodeURIComponent(this.to)
-        let link = `mailto:${toEncoded}`
+        // const toEncoded = encodeURIComponent(this.to)
+        const prefix = this.usingMailtoTools ? 'https://mailto.tools/' : 'mailto:'
+
+        let link = `${prefix}${this.to}`
 
         if (is.not.empty(this.queryString)) {
           link += `?${this.queryString}`
@@ -226,6 +283,10 @@
     watch: {
       link () {
         this.setFields()
+      },
+      // Sync mail tools option to local storage
+      usingMailtoTools (newValue) {
+        setOption('usingMailtoTools', newValue)
       }
     },
     mounted () {
@@ -245,9 +306,6 @@
       }
     },
     methods: {
-      mapParam (key) {
-        return `${encodeURIComponent(key)}=${encodeURIComponent(this.params[key])}`
-      },
       clear () {
         fields.forEach((key) => {
           this[key] = ''
