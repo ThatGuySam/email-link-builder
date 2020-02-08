@@ -6,23 +6,9 @@
       class="container"
       style="max-width: 900px;"
     >
-      <div
+      <MailLinkLayout
         v-if="isMailLink"
-        class="has-text-centered level"
-        style="min-height: 80vh;"
-      >
-        <div class="level-item">
-          <div>
-            <div class="is-block">Opening email</div>
-            <div class="is-size-7	">
-              <a
-                :href="mailRedirectUrl"
-                class="is-block"
-              >Click here is the email doesn't open automatically</a>
-            </div>
-          </div>
-        </div>
-      </div>
+      />
       <div
         v-else
         class="columns desktop-row-reverse"
@@ -170,6 +156,7 @@
   import {getOption, setOption} from '../helpers/options'
 
   import Hint from './Hint.vue'
+  import MailLinkLayout from './MailLinkLayout.vue'
 
   const fields = [
     'to',
@@ -189,45 +176,11 @@
     return hasEmailInUrl
   }
 
-  const variabler = (match, p1) => {
-    const dateOptions = {
-      // weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    }
-    
-    const variablerVariables = {
-      'date': (new Date()).toLocaleDateString('en-US', dateOptions)
-    }
-
-    if (!(p1 in variablerVariables)) return ''
-
-    return variablerVariables[p1]
-  }
-
-  const parseVariableString = (string) => {
-    return string.replace(/\{\{(.+?)\}\}/g, variabler)
-  }
-
-  const makeMailtoRedirectURL = () => {
-    const mailtoParams = new URLSearchParams(window.location.search)
-    const email = pathParts[1] || mailtoParams.get('to')
-
-    // If the 'to' param is set then remove it
-    mailtoParams.delete('to')
-
-    const subject = mailtoParams.get('subject')
-    if (subject) mailtoParams.set('subject', parseVariableString(subject))
-
-    const body = mailtoParams.get('body')
-    if (body) mailtoParams.set('body', parseVariableString(body))
-
-    return `mailto:${email}?${mailtoParams.toString(0)}`
-  }
-
   export default {
-    components: {Hint},
+    components: {
+      Hint,
+      MailLinkLayout
+    },
     data () {
       return {
         to: '',
@@ -241,9 +194,6 @@
     },
     computed: {
       isMailLink,
-      mailRedirectUrl () {
-        return makeMailtoRedirectURL()
-      },
       params () {
         const params = {}
 
@@ -290,13 +240,6 @@
       }
     },
     mounted () {
-      if (this.isMailLink) {
-        // Open the mailto url
-        const emailWindow = window.open(this.mailRedirectUrl, '_blank')
-        // Focus the new window
-        emailWindow.focus()
-      }
-
       // If fields is not set up yet initialize it
       if (is.not.object(local.fields)) {
         local.fields = {}
