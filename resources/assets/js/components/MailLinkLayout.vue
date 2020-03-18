@@ -21,6 +21,7 @@
 
 const pathParts = window.location.pathname.split('/')
 
+// Convert matching variables into respective values
 const variabler = (match, p1) => {
   const dateOptions = {
     // weekday: 'long',
@@ -33,12 +34,14 @@ const variabler = (match, p1) => {
     'date': (new Date()).toLocaleDateString('en-US', dateOptions)
   }
 
+  // If we can't find a matching variable key the return an empty string
   if (!(p1 in variablerVariables)) return ''
 
   return variablerVariables[p1]
 }
 
-const parseVariableString = (string) => string.replace(/\{\{(.+?)\}\}/g, variabler)
+// Find all double bracketed strings and run the variabler function on string
+const encodeVariables = (string) => string.replace(/\{\{(.+?)\}\}/g, variabler)
 
 const replacePlusesWithEncodedSpaces = (string) => string.replace(/\+/g, '%20')
 
@@ -58,8 +61,10 @@ const makeMailtoRedirectURL = () => {
     const paramValue = mailtoParams.get(paramName)
 
     if (paramValue !== null) {
-      const paramValueWithVariables = parseVariableString(paramValue)
+      // Replace variable strings with values
+      const paramValueWithVariables = encodeVariables(paramValue)
       
+      // Update the param
       mailtoParams.set(paramName, paramValueWithVariables)
     }
   })

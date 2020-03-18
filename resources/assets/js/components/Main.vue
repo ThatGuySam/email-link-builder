@@ -176,6 +176,8 @@
     return hasEmailInUrl
   }
 
+  const replacePlusesWithEncodedSpaces = (string) => string.replace(/\+/g, '%20')
+
   export default {
     components: {
       Hint,
@@ -211,7 +213,7 @@
           outputParams.set(paramEntry[0], paramEntry[1])
         })
 
-        return outputParams.toString()
+        return replacePlusesWithEncodedSpaces(outputParams.toString())
       },
       link () {
         // const toEncoded = encodeURIComponent(this.to)
